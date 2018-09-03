@@ -1,6 +1,36 @@
-class game
+require_relative 'board'
+
+class Game
+	attr_accessor :board
 
 	def initialize
-		@board = Board.new
+		if intro() 
+			puts "Loading..."
+			@board = Board.load()
+			self.play()#????????????????????????????????????????????????????????/
+		else
+			puts "Creating a new game..."
+			@board = Board.new
+		end
+		
 	end
+
+	def intro()
+		puts "type 'load' for loading a saved game, 'new' for new game"
+		decision = gets.chomp
+
+		if decision == "load"
+			return true
+		elsif decision == "new"
+			return false
+		else
+			"WRONG INPUT"
+			intro()
+		end
+
+
+	end
+
 end
+
+game = Game.new()
